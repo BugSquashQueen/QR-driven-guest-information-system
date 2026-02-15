@@ -21,16 +21,16 @@
 * { box-sizing: border-box; }
 
 body {
-  margin: 0;
+   margin: 0;
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background: url('images/beach-bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  color: #1d2a2a;
   display: flex;
   justify-content: center;
   padding: 20px;
-  min-height: 100vh;
-  overflow-y: auto;
+  min-height: 100dvh;
+  overflow: hidden;
+  
 }
 
 body::before {
@@ -45,12 +45,15 @@ body::before {
 .phone {
   max-width: 420px;
   width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
   border-radius: 30px;
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0,0,0,.06);
   background: #fff;
-  position: relative;
 }
+
 
 header {
   text-align: center;
@@ -209,6 +212,13 @@ ul li { margin: 10px 0; }
   min-height: calc(100vh - 40px);
 }
 
+.scroller {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
 
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; transform: none; opacity: 1; }
@@ -219,6 +229,8 @@ ul li { margin: 10px 0; }
 
 <body>
   <div class="phone">
+
+    <div class="scroller">
     <header>
       <div class="logo">
         <img src="dream png-01 (1).png" alt="Dream Logo">
@@ -281,7 +293,7 @@ ul li { margin: 10px 0; }
         </div>
       </section>
     </div>
-
+</div>
     <div class="footer">
       <button class="btn" onclick="location.href='index.html'">HOME</button>
       <button class="btn" onclick="location.href='golf-courses.html'">NEXT</button>
@@ -294,20 +306,13 @@ ul li { margin: 10px 0; }
  // Parallax
 const bg = document.querySelector('.hero-bg');
 
-window.addEventListener('scroll', () => {
-  const y = window.scrollY || 0;
-  if (bg) {
-    bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
-  }
+const scroller = document.querySelector('.scroller');
 
-  document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
-
-  clearTimeout(window.scrollTimer);
-  window.scrollTimer = setTimeout(() => {
-    document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
-  }, 120);
-
+scroller.addEventListener('scroll', () => {
+  const y = scroller.scrollTop || 0;
+  bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
 }, { passive: true });
+
 
 
 // Fade in cards when visible
