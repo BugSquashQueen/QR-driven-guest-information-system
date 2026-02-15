@@ -284,34 +284,34 @@ ul li{ margin:10px 0; }
     <div class="legal">© Dream Destinations 30A. All rights reserved.</div>
   </div>
 
-<script>
-  const scroller = document.getElementById('scroller');
-  const bg = document.querySelector('.hero-bg');
-  const heroText = document.querySelector('.hero-text');
+  <script>
+    // Parallax
+    const bg = document.querySelector('.hero-bg');
+    const heroText = document.querySelector('.hero-text');
 
-  // Parallax based on SCROLLER scroll
-  scroller.addEventListener('scroll', () => {
-    const y = scroller.scrollTop || 0;
-    bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
-    heroText.style.transform = `translateY(${y * 0.08}px)`;
-  }, { passive: true });
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY || 0;
+      bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
+      heroText.style.transform = `translateY(${y * 0.08}px)`;
+    }, { passive: true });
 
-  // Fade-in cards inside scroller
-  const io = new IntersectionObserver((entries)=> {
-    entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
-  }, { threshold: 0.15, root: scroller });
+    // Fade in cards when visible
+    const io = new IntersectionObserver((entries)=> {
+      entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+    }, { threshold: 0.15 });
 
-  document.querySelectorAll('.card').forEach(el => io.observe(el));
+    document.querySelectorAll('.card').forEach(el => io.observe(el));
 
-  // Glass reacts while scrolling
-  let scrollTimer;
-  scroller.addEventListener('scroll', () => {
-    document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
-    }, 120);
-  }, { passive: true });
-</script>
+    // Glass reacts while scrolling
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
+
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
+      }, 120);
+    }, { passive: true });
+  </script>
 </body>
 </html>
