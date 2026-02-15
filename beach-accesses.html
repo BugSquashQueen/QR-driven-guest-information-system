@@ -205,6 +205,11 @@ ul li { margin: 10px 0; }
   padding-bottom: 12px;
 }
 
+.phone {
+  min-height: calc(100vh - 40px);
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; transform: none; opacity: 1; }
   .hero img.hero-bg, .hero .hero-text { will-change: auto; }
@@ -286,33 +291,32 @@ ul li { margin: 10px 0; }
   </div>
 
 <script>
-  // Parallax
-  const bg = document.querySelector('.hero-bg');
-  const heroText = document.querySelector('.hero-text');
+ // Parallax
+const bg = document.querySelector('.hero-bg');
 
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY || 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY || 0;
+  if (bg) {
     bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
-    heroText.style.transform = `translateY(${y * 0.08}px)`;
-  }, { passive: true });
+  }
 
-  // Fade in cards when visible
-  const io = new IntersectionObserver((entries)=> {
-    entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
-  }, { threshold: 0.15 });
+  document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
 
-  document.querySelectorAll('.card').forEach(el => io.observe(el));
+  clearTimeout(window.scrollTimer);
+  window.scrollTimer = setTimeout(() => {
+    document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
+  }, 120);
 
-  // Glass reacts while scrolling
-  let scrollTimer;
-  window.addEventListener('scroll', () => {
-    document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
+}, { passive: true });
 
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
-    }, 120);
-  }, { passive: true });
+
+// Fade in cards when visible
+const io = new IntersectionObserver((entries)=> {
+  entries.forEach(e => e.target.classList.toggle('in-view', e.isIntersecting));
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.card').forEach(el => io.observe(el));
+
 </script>
 </body>
 </html>
