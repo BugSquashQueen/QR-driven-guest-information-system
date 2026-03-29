@@ -14,25 +14,23 @@
 :root{
   --mint:#cfeeee;
   --mint-strong:#2b7a78;
+  --ring:#dfeaea;
   --radius:20px;
-  --glass:rgba(255,255,255,0.55);
-  --glass-strong:rgba(255,255,255,0.42);
-  --shadow:0 18px 40px rgba(0,0,0,0.16);
-  --safe-bottom:env(safe-area-inset-bottom,0px);
 }
 
 *{box-sizing:border-box;}
-html,body{height:100%;}
 
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   background:url('images/beach-bg.jpg') no-repeat center center fixed;
   background-size:cover;
+  color:#1d2a2a;
   display:flex;
   justify-content:center;
-  min-height:100dvh;
-  overflow:hidden;
+  padding:20px;
+  min-height:100vh;
+  overflow-y:auto;
 }
 
 body::before{
@@ -47,25 +45,16 @@ body::before{
 .phone{
   max-width:420px;
   width:100%;
-  height:100dvh;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
   border-radius:30px;
   overflow:hidden;
+  box-shadow:0 6px 24px rgba(0,0,0,.06);
+  background:#fff;
 }
 
-.scroller{
-  flex:1 1 auto;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-}
-
-/* Header */
+/* HEADER */
 header{
   text-align:center;
   padding:16px;
-  background:#fff;
 }
 .logo{
   width:90px;
@@ -78,7 +67,7 @@ header{
 header h1{font-size:18px;margin:0;color:var(--mint-strong);}
 header .sub{font-size:12px;color:#7c8a8a;margin-top:4px;}
 
-/* Hero */
+/* HERO */
 .hero{
   position:relative;
   height:38vh;
@@ -101,26 +90,26 @@ header .sub{font-size:12px;color:#7c8a8a;margin-top:4px;}
   background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 45%,rgba(0,0,0,0) 100%);
 }
 
-/* Content */
+/* CONTENT */
 .content{
   margin-top:-15px;
   padding:0 16px 20px;
 }
 
 .card{
-  background:var(--glass);
+  background:rgba(255,255,255,0.55);
   backdrop-filter:blur(14px);
   border:1px solid rgba(255,255,255,0.35);
-  box-shadow:var(--shadow);
+  box-shadow:0 18px 40px rgba(0,0,0,0.16);
   border-radius:var(--radius);
   padding:18px 16px;
   margin-bottom:16px;
+
   opacity:0;
   transform:translateY(14px);
-  transition:.45s ease,background .25s ease;
+  transition:.45s ease, background .25s ease;
 }
 .card.in-view{opacity:1;transform:translateY(0);}
-.card.scrolling{background:var(--glass-strong);}
 
 .section-title{
   font-size:16px;
@@ -159,19 +148,12 @@ ul li{margin:10px 0;}
   font-size:13px;
 }
 
-/* Footer */
+/* FOOTER */
 .footer{
   display:flex;
-  flex-direction:column;
-  gap:12px;
-  padding:14px 22px calc(18px + var(--safe-bottom));
-  background:#fff;
-  border-top:1px solid rgba(223,234,234,0.9);
-}
-
-.button-row{
-  display:flex;
   gap:10px;
+  justify-content:flex-start;
+  padding:14px 22px 16px;
 }
 
 .btn{
@@ -192,15 +174,10 @@ ul li{margin:10px 0;}
 }
 
 .legal{
+  text-align:center;
   font-size:11px;
   color:#7c8a8a;
-  text-align:center;
-}
-
-/* Mobile */
-@media(max-width:500px){
-  body{padding:0;}
-  .phone{border-radius:0;}
+  padding-bottom:12px;
 }
 </style>
 </head>
@@ -208,68 +185,58 @@ ul li{margin:10px 0;}
 <body>
 <div class="phone">
 
-  <div class="scroller" id="scroller">
-    <header>
-      <div class="logo">
-        <img src="dream png-01 (1).png" alt="Dream Logo">
-      </div>
-      <h1>Welcome to Dream!</h1>
-      <div class="sub">Luxury is a Lifestyle, Memories are a Legacy</div>
-    </header>
-
-    <div class="hero">
-      <img src="naturewalk.png" alt="Office Photo" loading="eager">
-      <div class="overlay"></div>
-    </div>
-
-    <div class="content">
-      <section class="card">
-        <h2 class="section-title">OFFICE HOURS</h2>
-
-        <h3>Regular Hours</h3>
-        <ul>
-          <li>We are open every day.</li>
-          <li>Monday – Sunday: <b>9:00 AM – 5:00 PM</b></li>
-        </ul>
-
-        <h3>Contact</h3>
-        <ul>
-          <li>📞 <a href="tel:+18506665662">(850) 666-5662</a></li>
-          <li>📧 <a href="mailto:reservations@dreamdestinations30a.com">reservations@dreamdestinations30a.com</a></li>
-        </ul>
-
-        <div class="info-box">
-          <b>After-hours urgent help:</b> Please text our 24-hour line at <b>(850) 666-5662</b>.
-        </div>
-      </section>
-    </div>
+<header>
+  <div class="logo">
+    <img src="dream png-01 (1).png" alt="Dream Logo">
   </div>
+  <h1>Welcome to Dream!</h1>
+  <div class="sub">Luxury is a Lifestyle, Memories are a Legacy</div>
+</header>
 
-  <div class="footer">
-    <div class="button-row">
-      <button class="btn" onclick="location.href='index.html'">HOME</button>
-      <button class="btn" onclick="location.href='things-to-do.html'">NEXT</button>
+<div class="hero">
+  <img src="naturewalk.png" alt="Office Photo">
+  <div class="overlay"></div>
+</div>
+
+<div class="content">
+  <section class="card">
+    <h2 class="section-title">OFFICE HOURS</h2>
+
+    <h3>Regular Hours</h3>
+    <ul>
+      <li>We are open every day.</li>
+      <li>Monday – Sunday: <b>9:00 AM – 5:00 PM</b></li>
+    </ul>
+
+    <h3>Contact</h3>
+    <ul>
+      <li>📞 <a href="tel:+18506665662">(850) 666-5662</a></li>
+      <li>📧 <a href="mailto:reservations@dreamdestinations30a.com">reservations@dreamdestinations30a.com</a></li>
+    </ul>
+
+    <div class="info-box">
+      <b>After-hours urgent help:</b> Please text our 24-hour line at <b>(850) 666-5662</b>.
     </div>
-    <div class="legal">
-      © Dream Destinations 30A. All rights reserved.
-    </div>
-  </div>
+  </section>
+</div>
+
+<div class="footer">
+  <button class="btn" onclick="location.href='index.html'">HOME</button>
+  <button class="btn" onclick="location.href='things-to-do.html'">NEXT</button>
+</div>
+
+<div class="legal">
+  © Dream Destinations 30A. All rights reserved.
+</div>
 
 </div>
 
 <script>
-const scroller = document.getElementById('scroller');
 const bg = document.querySelector('.hero img');
 
-scroller.addEventListener('scroll', () => {
-  const y = scroller.scrollTop || 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY || 0;
   bg.style.transform = `translateY(${y * 0.2}px) scale(1.08)`;
-
-  document.querySelectorAll('.card').forEach(card => card.classList.add('scrolling'));
-  clearTimeout(window.scrollTimer);
-  window.scrollTimer = setTimeout(() => {
-    document.querySelectorAll('.card').forEach(card => card.classList.remove('scrolling'));
-  }, 120);
 }, { passive:true });
 
 const io = new IntersectionObserver((entries)=>{
